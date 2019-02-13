@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
-import { View } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 import Game from './src/game';
 
-export default class Engine extends PureComponent {
+export default class Engine extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -13,8 +12,8 @@ export default class Engine extends PureComponent {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1
   }
-});
+})
