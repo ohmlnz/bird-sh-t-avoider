@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import { StyleSheet, Image } from "react-native";
+import React, { Component } from 'react';
+import { StyleSheet, Image } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
-import Matter from "matter-js";
-import MarioWalking from "./mario-walking.gif";
+import Matter from 'matter-js';
+import MarioWalking from './mario-walking.gif';
+import MarioIdling from './mario-idling.gif';
+
 
 
 export class Renderer extends Component {
@@ -24,8 +26,8 @@ export class Renderer extends Component {
             left: x,
             top: y,
             transform: [
-              { rotateZ: angle + "rad" },
-              { rotateY: (direction === "right" ? 180 : 0) + "deg" }
+              { rotateZ: angle + 'rad' },
+              { rotateY: (direction === 'right' ? 180 : 0) + 'deg' }
             ]
           }
         ]}
@@ -36,7 +38,7 @@ export class Renderer extends Component {
 
 const styles = StyleSheet.create({
   mario: {
-    position: "absolute"
+    position: 'absolute'
   }
 });
 
@@ -54,17 +56,18 @@ export default (world, pos) => {
     size: { width, height },
     controls: {
       gestures: {},
-      mode: "platform"
+      mode: 'platform'
     },
     direction: {
-      horizontal: "right",
-      vertical: "up"
+      horizontal: 'right',
+      vertical: 'up'
     },
-    action: "walking",
+    action: 'idling',
     actions: {
+      idling: resolveAssetSource(MarioIdling),
       walking: resolveAssetSource(MarioWalking),
     },
-    "power-ups": {},
+    'power-ups': {},
     animations: {},
     renderer: <Renderer />
   };
