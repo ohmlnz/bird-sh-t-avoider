@@ -7,12 +7,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^32.0.0",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "d3-interpolate": "^1.1.6",
+    "expo": "^32.0.0",
     "lodash": "^4.17.4",
     "matter-js": "^0.13.0",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-animatable": "^1.2.4",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-game-engine": "git+https://github.com/bberak/react-native-game-engine.git#rx-update",

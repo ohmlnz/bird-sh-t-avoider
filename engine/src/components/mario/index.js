@@ -5,8 +5,6 @@ import Matter from 'matter-js';
 import MarioWalking from './mario-walking.gif';
 import MarioIdling from './mario-idling.gif';
 
-
-
 export class Renderer extends Component {
   render() {
     const source = this.props.actions[this.props.action];
@@ -23,13 +21,15 @@ export class Renderer extends Component {
         style={[
           styles.mario,
           {
+            width: 70,
+            height: 100,
             left: x,
             top: y,
             transform: [
               { rotateZ: angle + 'rad' },
               { rotateY: (direction === 'right' ? 180 : 0) + 'deg' }
             ]
-          }
+          } 
         ]}
       />
     );
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 export default (world, pos) => {
-  let width = 30;
+  let width = 50;
   let height = 40;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 0.8,
