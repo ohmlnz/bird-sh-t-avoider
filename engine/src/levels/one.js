@@ -10,7 +10,7 @@ Matter.Common.isElement = () => false;
 
 const { width, height } = Dimensions.get('window');
 const cx = width / 2;
-const offsetY = (height - 465) / 2 - 35;
+// const offsetY = (height - 465) / 2 - 35;
 
 export const LevelOne = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
