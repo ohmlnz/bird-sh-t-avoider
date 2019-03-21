@@ -16,7 +16,7 @@ export default class Game extends PureComponent {
           <StatusBar hidden={true} />
         </GameEngine>
       </View>
-
+  
     );
   }
 }

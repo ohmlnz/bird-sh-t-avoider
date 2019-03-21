@@ -15,13 +15,14 @@ const cx = width / 2;
 export const LevelOne = () => {
   let engine = Matter.Engine.create({ enableSleeping: false });
   let world = engine.world;
+  let time = 0
 
   world.gravity = { x: 0, y: 0 };
 
   return {
     physics: { engine: engine, world: world },
-    mario: Mario(world, { x: cx, y: offsetY + 465 - 20 / 2 - 20 }),
-    bird: Bird(world, {x:0,y:55}),
-    camera: { offsetY: 0 }
+    mario: Mario(world, { x: cx, y: height - 120 }),
+    camera: { offsetY: 0 },
+    time
   };
 };
