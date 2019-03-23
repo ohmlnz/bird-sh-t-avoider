@@ -9,11 +9,11 @@ const hasExceededScreenLimits = (entity) => {
   return entity.body.position.x >= width || entity.body.position.x <= 0;
 };
 
-let divider = 15;
+let time = 10;
 let level = 1;
 let totalBirds = 5;
-let birdInterval = divider/totalBirds;
-let nextSend
+let birdInterval = time/totalBirds;
+let nextSend = 10;
 
 const fireEvent = (entities, { touches }) => {
   // update time
@@ -32,20 +32,32 @@ const fireEvent = (entities, { touches }) => {
   }
   
   // bird position logic
-  let seconds = Math.trunc(entities.time)
+  let seconds = Math.trunc(entities.time);
+  let sendCheck = parseFloat(entities.time.toFixed(3));
 
   //increase level
-  if(seconds > 1 && seconds % divider === 0){
-    divider += 30;
-    console.log(Math.log(level));
+  if(seconds > 1 && seconds % time === 0){
+    time += 10;
     level++;
-    let birdName = '__bird__' + uuidv1();
-    let newBird = birdHelpers.addBird();
-    entities[birdName]= newBird;
+    totalBirds = level * 5;
+    birdInterval = 30/totalBirds;
   }
+  // console.log(time)
+  // console.log(level)
+  // console.log(totalBirds)
+  // console.log(birdInterval)
+  //  console.log(sendCheck);
+  //  console.log(nextSend)
+  // console.log(level)
 
-  if(level > 1){
 
+
+  if(sendCheck === nextSend){
+    let birdName = '__bird__' + uuidv1();
+    // TODO: change to createBird
+    let newBird = birdHelpers.addBird();
+    entities[birdName] = newBird;
+    nextSend = sendCheck + birdInterval;
   }
   
   let birds = birdHelpers.getBirds(entities);

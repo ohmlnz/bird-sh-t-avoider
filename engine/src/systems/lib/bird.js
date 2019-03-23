@@ -14,7 +14,7 @@ function setPosition(bird,width) {
   // if (bird.left)
   //   bird.body.position.x -= 7;
   // if (bird.right)
-  bird.body.position.x += 7;
+  bird.body.position.x += 4;
 }
 
 
