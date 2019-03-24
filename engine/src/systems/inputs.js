@@ -12,7 +12,7 @@ let nextSend = 10;
 export default (entities, { touches }) => {
   // update time
   entities.time += .03;
-  let bird = entities.bird;
+  let { bird, physics } = entities;
 
   // ______________________________ BIRD LOGIC________________________________________________________________
 
@@ -31,7 +31,7 @@ export default (entities, { touches }) => {
   if(seconds >= nextSend) {
     let birdName = '__bird__' + uuidv1();
     // TODO: change to createBird
-    let newBird = birdHelpers.addBird();
+    let newBird = birdHelpers.addBird(physics.world);
     entities[birdName] = newBird;
     nextSend = seconds + birdInterval;
   }

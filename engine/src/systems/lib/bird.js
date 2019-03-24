@@ -22,13 +22,10 @@ function setPosition(bird,width) {
 }
 
 
-function addBird(screenWidth) {
-  let engine = Matter.Engine.create({ enableSleeping: false });
-  let world = engine.world;
-  world.gravity = { x: 0, y: 0 };
+function addBird(currentWorld, screenWidth = 0) {
   let isGoingLeft = Math.random() >= 0.5;
   let startingPosition = isGoingLeft ? { x:screenWidth ,y:45 } : { x:0,y:55 } 
-  return Bird(world, startingPosition, isGoingLeft);
+  return Bird(currentWorld, startingPosition, isGoingLeft);
 }
 
 function getBirds(entites){
