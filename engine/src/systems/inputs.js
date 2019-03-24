@@ -1,49 +1,39 @@
-import Matter from 'matter-js';
 import { Dimensions } from 'react-native';
-import { collidesWith } from './helpers'
 const { width } = Dimensions.get('window');
+const birdHelpers = require('./lib/bird');
+const uuidv1 = require('uuid/v1');
 
-const fireEvent = (entities, { touches }) => {
-	let { mario, bird } = entities
-	let pressed = touches.filter(t => t.type === 'start')[0]
-	let end = touches.filter(t => t.type === 'end')[0]
-	mario.hit = false
+let divider = 15;
+let level = 1;
+let totalBirds = 5;
+let birdInterval = divider/totalBirds;
+let nextSend
 
-	// sets action based on event input
-	if (pressed && !end) {
-		mario.action = 'walking'
-		mario.direction.horizontal = pressed.event.locationX > (width / 2) ? 'right' : 'left'
-	} else if (end) {
-		mario.action = 'idling'
+export default (entities, { touches }) => {
+  // update time
+  entities.time += .03;
+	let bird = entities.bird;
+
+  // bird position logic
+  let seconds = Math.trunc(entities.time)
+
+  //increase level
+  if(seconds > 1 && seconds % divider === 0){
+    divider += 30;
+    console.log(Math.log(level));
+    level++;
+    let birdName = '__bird__' + uuidv1();
+    let newBird = birdHelpers.addBird();
+    entities[birdName]= newBird;
   }
 
-	// sets coordinates based on horizontal direction property
-	if (mario.action === 'walking') {
-		let pos = mario.body.position
-		// TODO: define velocity and acceleration
-		Matter.Body.setPosition(mario.body, { 
-			x: mario.direction.horizontal === "right" ? pos.x + 2.5 : pos.x - 2.5, 
-			y: pos.y
-		})
-	}
+  if(level > 1){
 
-	// TODO: set collision with turds
-	if (collidesWith(mario.body, bird.body)) {
-		mario.hit = true
-	}
-	  
-  if (bird.body.position.x >= width) {
-    bird.left = true;
-    bird.right = false;
   }
-  if (bird.body.position.x === 0) {
-    bird.right = true;
-    bird.left = false;
-  }
-  if (bird.left)bird.body.position.x-= 1;
-  if (bird.right)bird.body.position.x+= 1;
+  
+  let birds = birdHelpers.getBirds(entities);
+  if(birds.length) for(bird of birds) birdHelpers.setPosition(bird, width);
 
-	return entities;
-}
 
-export { fireEvent }
+  return entities;
+};

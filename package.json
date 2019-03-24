@@ -16,7 +16,8 @@
     "react-native-animatable": "^1.2.4",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-game-engine": "git+https://github.com/bberak/react-native-game-engine.git#rx-update",
-    "react-native-typewriter": "^0.5.3"
+    "react-native-typewriter": "^0.5.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
 import { LevelOne } from './levels/one';
-import { fireEvent } from './systems/inputs';
+import Systems from './systems'
 
 export default class Game extends PureComponent {
   render() {
@@ -10,13 +10,13 @@ export default class Game extends PureComponent {
       <View style={styles.container}>
         <GameEngine
           ref={"engine"}
-          systems={[fireEvent]}
+          systems={Systems}
           entities={LevelOne()}
         >
           <StatusBar hidden={true} />
         </GameEngine>
       </View>
-
+  
     );
   }
 }
