@@ -3,11 +3,6 @@ const { width } = Dimensions.get('window');
 const birdHelpers = require('./lib/bird');
 const uuidv1 = require('uuid/v1');
 
-// detects if body is outside of boundaries
-const hasExceededScreenLimits = (entity) => {
-  return entity.body.position.x >= width || entity.body.position.x <= 0;
-};
-
 let levelTime = 10;
 let level = 1;
 let totalBirds = 5;
@@ -18,22 +13,6 @@ export default (entities, { touches }) => {
   // update time
   entities.time += .03;
 	let bird = entities.bird;
-
-// ______________________________MARIO LOGIC________________________________________________________________
-  // sets action based on event input
-  if (pressed && !end) {
-    mario.action = 'walking';
-    mario.direction.horizontal = pressed.event.locationX > (width / 2) ? 'right' : 'left';
-  } else if (end) {
-    mario.action = 'idling';
-  }
-
-  if (mario.action === 'walking') {
-    // TO DO: replace direct data mutation w/ Matter.js physics methods
-    mario.body.position.x += mario.direction.horizontal === 'right' ? 4 : - 4;
-  }
-
-
 
   // ______________________________ BIRD LOGIC________________________________________________________________
 

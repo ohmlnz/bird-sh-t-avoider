@@ -1,8 +1,6 @@
 import { Dimensions } from 'react-native';
 import Matter from 'matter-js';
 import Mario from '../components/mario';
-import Bird from '../components/bird';
-
 
 //-- Overriding this function because the original references HTMLElement
 //-- which will throw an error when running in a React Native context
@@ -22,7 +20,6 @@ export const LevelOne = () => {
   return {
     physics: { engine: engine, world: world },
     mario: Mario(world, { x: cx, y: height - 120 }),
-    bird: Bird(world, { x: 100, y: height - 120 }),
     camera: { offsetY: 0 },
     time
   };

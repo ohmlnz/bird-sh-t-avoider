@@ -63,6 +63,7 @@ export default (world, pos) => {
       horizontal: 'right',
       vertical: 'up'
     },
+    acceleration: 0,
     hit: false,
     action: 'idling',
     actions: {
