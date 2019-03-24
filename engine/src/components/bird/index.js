@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default (world, pos) => {
+export default (world, pos, isGoingLeft) => {
   let width = 30;
   let height = 40;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
@@ -52,6 +52,7 @@ export default (world, pos) => {
   });
   Matter.World.add(world, [body]);
   return {
+    isGoingLeft,
     body,
     size: { width, height },
     controls: {
