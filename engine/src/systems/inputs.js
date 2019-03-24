@@ -25,7 +25,7 @@ const fireEvent = (entities, { touches }) => {
   let end = touches.filter(t => t.type === 'end')[0];
   let bird = entities.bird;
 
-   // ______________________________MARIO LOGIC________________________________________________________________
+  // ______________________________MARIO LOGIC________________________________________________________________
   // sets action based on event input
   if (pressed && !end) {
     mario.action = 'walking';
@@ -54,13 +54,6 @@ const fireEvent = (entities, { touches }) => {
     totalBirds = level * 5;
     birdInterval = 30/totalBirds;
   }
-  // console.log(time)
-  //  console.log(level)
-  // console.log(totalBirds)
-  // console.log(birdInterval)
-  // console.log(sendCheck);
-  // console.log(nextSend)
-  // console.log(level)
 
   if(seconds >= nextSend) {
     let birdName = '__bird__' + uuidv1();
