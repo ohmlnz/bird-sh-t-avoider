@@ -14,15 +14,21 @@ function setPosition(bird,width) {
   // if (bird.left)
   //   bird.body.position.x -= 7;
   // if (bird.right)
-  bird.body.position.x += 7;
+   if(bird.isGoingLeft){
+    bird.body.position.x -= 4;
+   }else{
+    bird.body.position.x += 4;
+   }
 }
 
 
-function addBird(bird,width) {
+function addBird(screenWidth) {
   let engine = Matter.Engine.create({ enableSleeping: false });
   let world = engine.world;
   world.gravity = { x: 0, y: 0 };
-  return Bird(world, { x:0,y:55 });
+  let isGoingLeft = Math.random() >= 0.5;
+  let startingPosition = isGoingLeft ? { x:screenWidth ,y:45 } : { x:0,y:55 } 
+  return Bird(world, startingPosition, isGoingLeft);
 }
 
 function getBirds(entites){
