@@ -8,7 +8,7 @@ export default (entities, { touches }) => {
   let pressed = touches.filter(t => t.type === 'start')[0]
   let end = touches.filter(t => t.type === 'end')[0]
 
-  // default hit box to false
+  // defaults hit box to false
   mario.hit = false
 
   // sets action based on event input
