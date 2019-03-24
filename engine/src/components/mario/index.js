@@ -21,14 +21,15 @@ export class Renderer extends Component {
         style={[
           styles.mario,
           {
-            width: 70,
-            height: 100,
+            width: 50,
+            height: 80,
             left: x,
             top: y,
             transform: [
               { rotateZ: angle + 'rad' },
               { rotateY: (direction === 'right' ? 180 : 0) + 'deg' }
-            ]
+            ],
+            ...(this.props.hit && { backgroundColor: 'yellow' })
           } 
         ]}
       />
@@ -49,7 +50,7 @@ export default (world, pos) => {
     density: 0.8,
     frictionAir: 0.2,
     friction: 1,
-  });
+  });  
   Matter.World.add(world, [body]);
   return {
     body,
@@ -62,6 +63,7 @@ export default (world, pos) => {
       horizontal: 'right',
       vertical: 'up'
     },
+    hit: false,
     action: 'idling',
     actions: {
       idling: resolveAssetSource(MarioIdling),

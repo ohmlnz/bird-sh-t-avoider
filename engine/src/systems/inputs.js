@@ -1,4 +1,3 @@
-import Matter from 'matter-js';
 import { Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 const birdHelpers = require('./lib/bird');
@@ -15,13 +14,10 @@ let totalBirds = 5;
 let birdInterval = levelTime/totalBirds;
 let nextSend = 10;
 
-const fireEvent = (entities, { touches }) => {
+export default (entities, { touches }) => {
   // update time
   entities.time += .03;
-  let mario = entities.mario;
-  let pressed = touches.filter(t => t.type === 'start')[0];
-  let end = touches.filter(t => t.type === 'end')[0];
-  let bird = entities.bird;
+	let bird = entities.bird;
 
 // ______________________________MARIO LOGIC________________________________________________________________
   // sets action based on event input
@@ -77,7 +73,3 @@ const fireEvent = (entities, { touches }) => {
 
   return entities;
 };
-
-export { fireEvent };
- 
-

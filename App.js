@@ -14,10 +14,6 @@ export default class App extends Component {
     ])
   }
 
-  componentWillMount() {
-    // enforce landscape mode
-  }
-
   render() {
     if (!this.state.ready) {
       return (
