@@ -34,7 +34,6 @@ export default (entities, { touches }) => {
 
   birdHelpers.deleteBirds(entities,width);
 
-  
   let birds = birdHelpers.getBirds(entities);
   if(birds.length) for(bird of birds) birdHelpers.setPosition(bird, width);  
 
