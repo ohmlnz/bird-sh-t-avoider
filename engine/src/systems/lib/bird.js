@@ -1,6 +1,6 @@
 import Matter from 'matter-js';
 import Bird  from '../../components/bird/index';
-
+import { hasExceededScreenLimits } from '../helpers'
 
 function setPosition(bird,width) {
   let {position} = bird.body;
@@ -12,7 +12,6 @@ function setPosition(bird,width) {
 
 
 function addBird(currentWorld, screenWidth = 0) {
-
   let isGoingLeft = Math.random() >= 0.5;
   let startingPosition = isGoingLeft ? { x:screenWidth ,y:45 } : { x:0,y:55 }; 
   return Bird(currentWorld, startingPosition, isGoingLeft);
@@ -29,17 +28,15 @@ function getBirds(entites){
   return birds;
 }
 
-function deleteBirds(entites,screenWidth){
-  let keys = Object.keys(entites);
+function deleteBirds(currentWorld, entities) {
+  let keys = Object.keys(entities);
   for(let i = 0; i < keys.length; i++){
     if(keys[i].includes('__bird__')){
-      if(entites[keys[i]].body.position.x > screenWidth || 
-        entites[keys[i]].body.position.x < 0){
-        delete entites[keys[i]];
+      if (hasExceededScreenLimits(entities[keys[i]])) {
+        Matter.Composite.remove(currentWorld, entities[keys[i]].body);
+        delete entities[keys[i]];
       }
-    }
-   
-    
+    } 
   }
 }
 

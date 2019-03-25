@@ -1,8 +1,10 @@
 import Matter from 'matter-js';
+import { Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 
 // detects if body is outside of boundaries
 export const hasExceededScreenLimits = (entity) => {
-	return entity.body.position.x >= width || entity.body.position.x <= 0
+	return entity.body.position.x > width || entity.body.position.x < 0
 }
 // detects collisions between two bodies
 export const collidesWith = (bodyA, bodyB) => {
