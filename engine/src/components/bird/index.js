@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default (world, pos, isGoingLeft) => {
+export default (world, pos, isGoingLeft, birdName) => {
   let width = 30;
   let height = 40;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
@@ -54,6 +54,9 @@ export default (world, pos, isGoingLeft) => {
   return {
     isGoingLeft,
     body,
+    key: birdName,
+    turds: [],
+    pooping: false,
     size: { width, height },
     controls: {
       gestures: {},

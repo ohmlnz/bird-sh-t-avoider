@@ -1,15 +1,11 @@
 import Matter from 'matter-js';
 import { Dimensions } from 'react-native';
-import { collidesWith } from './helpers';
 const { width } = Dimensions.get('window');
 
 export default (entities, { touches }) => {
   let { mario } = entities;
   let pressed = touches.filter(t => t.type === 'start')[0];
   let end = touches.filter(t => t.type === 'end')[0];
-
-  // defaults hit box to false
-  mario.hit = false;
 
   // sets action based on event input
   if (pressed && !end) {
@@ -33,10 +29,12 @@ export default (entities, { touches }) => {
     });
   }
 
-  // TODO: set collision with turds
-  // if (collidesWith(mario.body, bird.body)) {
-  // 	mario.hit = true
-  // }
+  // set boundaries
+  if (mario.body.position.x < 0) {
+    mario.body.position.x = 0
+  } else if (mario.body.position.x > width) {
+    mario.body.position.x = width
+  }
 
   return entities;
 };

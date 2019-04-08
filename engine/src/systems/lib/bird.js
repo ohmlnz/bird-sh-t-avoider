@@ -10,11 +10,10 @@ function setPosition(bird,width) {
   });
 }
 
-
-function addBird(currentWorld, screenWidth = 0) {
+function addBird(currentWorld, screenWidth = 0, birdName) {
   let isGoingLeft = Math.random() >= 0.5;
-  let startingPosition = isGoingLeft ? { x:screenWidth ,y:45 } : { x:0,y:55 }; 
-  return Bird(currentWorld, startingPosition, isGoingLeft);
+  let startingPosition = isGoingLeft ? { x: screenWidth, y: 45 } : { x: 0, y: 55 }; 
+  return Bird(currentWorld, startingPosition, isGoingLeft, birdName);
 }
 
 function getBirds(entites){
@@ -32,7 +31,7 @@ function deleteBirds(currentWorld, entities) {
   let keys = Object.keys(entities);
   for(let i = 0; i < keys.length; i++){
     if(keys[i].includes('__bird__')){
-      if (hasExceededScreenLimits(entities[keys[i]])) {
+      if (hasExceededScreenLimits(entities[keys[i]]) && !entities[keys[i]].pooping) {
         Matter.Composite.remove(currentWorld, entities[keys[i]].body);
         delete entities[keys[i]];
       }

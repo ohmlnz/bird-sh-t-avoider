@@ -1,47 +1,29 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image } from 'react-native';
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+import { Image } from 'react-native';
 import Matter from 'matter-js';
-import MarioWalking from './mario-walking.gif';
-import MarioIdling from './mario-idling.gif';
 
 export class Renderer extends Component {
-  render() {
-    const source = this.props.actions[this.props.action];
-    const { width, height } = source;
+  render() {   
     const body = this.props.body;
-    const x = body.position.x - width / 2;
-    const y = body.position.y - height / 2;
-    const angle = body.angle;
-    const direction = this.props.direction.horizontal;
-    
+    const x = body.position.x;
+    const y = body.position.y; 
     return (
       <Image
-        source={source}
         style={[
-          styles.mario,
           {
-            width: 50,
-            height: 80,
-            left: x,
             top: y,
-            transform: [
-              { rotateZ: angle + 'rad' },
-              { rotateY: (direction === 'right' ? 180 : 0) + 'deg' }
-            ],
-            ...(this.props.hit && { backgroundColor: 'yellow' })
+            left: x,
+            position: 'absolute',
+            backgroundColor: 'brown',
+            width: 30,
+            height: 30,
+            position: 'absolute'
           } 
         ]}
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  mario: {
-    position: 'absolute'
-  }
-});
 
 export default (world, pos) => {
   let width = 50;
@@ -55,23 +37,7 @@ export default (world, pos) => {
   return {
     body,
     size: { width, height },
-    controls: {
-      gestures: {},
-      mode: 'platform'
-    },
-    direction: {
-      horizontal: 'right',
-      vertical: 'up'
-    },
     acceleration: 0,
-    hit: false,
-    action: 'idling',
-    actions: {
-      idling: resolveAssetSource(MarioIdling),
-      walking: resolveAssetSource(MarioWalking),
-    },
-    'power-ups': {},
-    animations: {},
     renderer: <Renderer />
   };
 };
