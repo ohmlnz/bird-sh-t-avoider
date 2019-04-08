@@ -15,7 +15,7 @@ let poopInterval = 10
 let maxPoop = 1
 let currentPoop = 0
 
-export default (entities, { touches }) => {
+export default (entities, { dispatch }) => {
   // update time
   entities.time += .03;
   let { physics, mario } = entities;
@@ -51,6 +51,8 @@ export default (entities, { touches }) => {
   // checks for collisions between mario and turds
   Object.keys(entities).filter(e => e.includes('__turd__')).forEach(t => {
     if (collidesWith(entities[t].body, mario.body)) {
+      if (!entities[t].collided) mario.health--
+      entities[t].collided = true
       mario.hit = true
     }
   })
@@ -88,6 +90,11 @@ export default (entities, { touches }) => {
         }
        }
     }
+  }
+
+  // mario health management
+  if (mario.health <= 0) {
+    dispatch({ type: 'game-over' });
   }
 
   return entities;
