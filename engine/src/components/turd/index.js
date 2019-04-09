@@ -15,9 +15,9 @@ export class Renderer extends Component {
             left: x,
             position: 'absolute',
             backgroundColor: 'brown',
-            width: 30,
-            height: 30,
-            position: 'absolute'
+            width: 20,
+            height: 20,
+            position: 'absolute',
           } 
         ]}
       />
@@ -26,8 +26,8 @@ export class Renderer extends Component {
 }
 
 export default (world, pos) => {
-  let width = 50;
-  let height = 40;
+  let width = 10;
+  let height = 10;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 0.8,
     frictionAir: 0.2,
@@ -36,6 +36,7 @@ export default (world, pos) => {
   Matter.World.add(world, [body]);
   return {
     body,
+    resistance: 0,
     size: { width, height },
     acceleration: 0,
     renderer: <Renderer />

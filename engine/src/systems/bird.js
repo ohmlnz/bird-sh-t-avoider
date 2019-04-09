@@ -75,18 +75,21 @@ export default (entities, { dispatch }) => {
       birdHelpers.setPosition(bird, width); 
       // update turd position
       if (bird.pooping) {
-        const turd = '__turd__' + bird.key.slice(8)
-        Matter.Body.setPosition(entities[turd].body, {
-          x: bird.body.position.x,
-          y: entities[turd].body.position.y + 3
+        const key = '__turd__' + bird.key.slice(8)
+        const turd = entities[key]
+        // resistance of turd vs wind
+        turd.resistance = bird.isGoingLeft ? turd.resistance - 1 : turd.resistance + 1
+        Matter.Body.setPosition(turd.body, {
+          x: bird.body.position.x - turd.resistance,
+          y: turd.body.position.y + 3
         })
 
         // remove turd if out of bonds
-        if (entities[turd].body.position.y > height) {
+        if (turd.body.position.y > height) {
           bird.pooping = false
           bird.turds.pop()
-          Matter.Composite.remove(physics.world, entities[turd].body);
-          delete entities[turd]          
+          Matter.Composite.remove(physics.world, turd.body);
+          delete entities[key]          
         }
        }
     }
