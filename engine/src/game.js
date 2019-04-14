@@ -1,18 +1,19 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, StatusBar, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, StatusBar, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
 import { LevelOne } from './levels/one';
 import Systems from './systems'
+import BusStop from './busstop.jpg';
 
 export default class Game extends PureComponent {
   state = {
     running: true
   }
 
-  gameOver = () => {
+  gameover = () => {
     this.setState({ 
       running: false, 
-      gameOver: true 
+      gameover: true 
     })
   }
 
@@ -21,37 +22,37 @@ export default class Game extends PureComponent {
 
     this.setState({
       running: true,
-      gameOver: false,
+      gameover: false,
     })
   }
 
   handleEvent = ev => {
     if (ev.type === 'game-over') {
-      this.gameOver()
+      this.gameover()
     } 
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <GameEngine
-          ref={"engine"}
-          systems={Systems}
-          entities={LevelOne()}
-          running={this.state.running}
-          onEvent={this.handleEvent}
-        >
-          <StatusBar hidden={true} />
-          { this.state.gameOver && 
-            <TouchableOpacity onPress={this.restart}>
-              <Text style={styles.gameOver}>
-                You lost! Click here to play again.
-              </Text> 
-            </TouchableOpacity>
-          }
-        </GameEngine>
+        <ImageBackground source={BusStop} style={styles.background}>
+          <GameEngine
+            ref={"engine"}
+            systems={Systems}
+            entities={LevelOne()}
+            running={this.state.running}
+            onEvent={this.handleEvent}
+          >
+            <StatusBar hidden={true} />
+            { this.state.gameover && 
+              <TouchableOpacity onPress={this.restart}>
+                <Text style={styles.gameover}>
+                  You lost! Click here to play again.
+                </Text> 
+              </TouchableOpacity> }
+          </GameEngine>
+        </ImageBackground>
       </View>
-  
     );
   }
 }
@@ -59,9 +60,13 @@ export default class Game extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#6dc7ff'
   },
-  gameOver: {
+  background: {
+    width: '100%', 
+    height: '100%', 
+    zIndex: '-1'
+  },
+  gameover: {
     marginTop: 80,
     textAlign: 'center',
     color: 'black',

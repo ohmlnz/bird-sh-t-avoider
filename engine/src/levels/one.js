@@ -19,7 +19,7 @@ export const LevelOne = () => {
 
   return {
     physics: { engine: engine, world: world },
-    mario: Mario(world, { x: cx, y: height - 120 }),
+    mario: Mario(world, { x: cx, y: height - 100 }),
     camera: { offsetY: 0 },
     time
   };

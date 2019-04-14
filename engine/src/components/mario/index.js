@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Image } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import Matter from 'matter-js';
-import MarioWalking from './mario-walking.gif';
-import MarioIdling from './mario-idling.gif';
+import MarioWalking from './images/mario-walking.gif';
+import MarioIdling from './images/mario-idling.gif';
 
 export class Renderer extends Component {
   render() {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
 export default (world, pos) => {
   let width = 50;
-  let height = 40;
+  let height = 80;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 0.8,
     frictionAir: 0.2,

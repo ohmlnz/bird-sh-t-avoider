@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Image } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import Matter from 'matter-js';
-import MarioWalking from './mario-walking.gif';
-import MarioIdling from './mario-idling.gif';
-
-
+import BirdFlying from './images/bird-flying.gif';
 
 export class Renderer extends Component {
   render() {
@@ -21,7 +18,7 @@ export class Renderer extends Component {
       <Image
         source={source}
         style={[
-          styles.mario,
+          styles.bird,
           {
             left: x,
             top: y,
@@ -37,14 +34,14 @@ export class Renderer extends Component {
 }
 
 const styles = StyleSheet.create({
-  mario: {
+  bird: {
     position: 'absolute'
   }
 });
 
 export default (world, pos, isGoingLeft, birdName) => {
-  let width = 30;
-  let height = 40;
+  let width = 116;
+  let height = 116;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 0.8,
     frictionAir: 0.2,
@@ -66,10 +63,9 @@ export default (world, pos, isGoingLeft, birdName) => {
       horizontal: 'right',
       vertical: 'up'
     },
-    action: 'idling',
+    action: 'flying',
     actions: {
-      idling: resolveAssetSource(MarioIdling),
-      walking: resolveAssetSource(MarioWalking),
+      flying: resolveAssetSource(BirdFlying),
     },
     'power-ups': {},
     animations: {},

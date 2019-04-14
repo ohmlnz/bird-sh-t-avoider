@@ -38,6 +38,7 @@ export default (entities, { dispatch }) => {
   if(seconds >= nextSend) {
     let birdName = '__bird__' + uuidv1();
     let newBird = birdHelpers.addBird(physics.world, width, birdName);
+    if (!newBird.isGoingLeft) newBird.direction.horizontal = 'left'
     let turd = Turd(physics.world, { x: - 50, y : newBird.body.position.y })
     newBird.turds = new Array(3).fill(turd)
     entities[birdName] = newBird;

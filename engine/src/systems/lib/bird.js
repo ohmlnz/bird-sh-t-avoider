@@ -3,7 +3,7 @@ import Bird  from '../../components/bird/index';
 import { hasExceededScreenLimits } from '../helpers'
 
 function setPosition(bird,width) {
-  let {position} = bird.body;
+  let { position } = bird.body;
   Matter.Body.setPosition(bird.body, {
     x: bird.isGoingLeft ? position.x -= 4 : position.x += 4,
     y: position.y
