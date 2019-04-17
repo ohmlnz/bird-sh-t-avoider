@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Image } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import Matter from 'matter-js';
-import MarioWalking from './images/mario-walking.gif';
-import MarioIdling from './images/mario-idling.gif';
+import CharacterWalking from './images/character-walking.gif';
+import CharacterIdling from './images/character-idling.gif';
 
 export class Renderer extends Component {
   render() {
@@ -19,7 +19,7 @@ export class Renderer extends Component {
       <Image
         source={source}
         style={[
-          styles.mario,
+          styles.character,
           {
             width: 50,
             height: 80,
@@ -27,9 +27,9 @@ export class Renderer extends Component {
             top: y,
             transform: [
               { rotateZ: angle + 'rad' },
-              { rotateY: (direction === 'right' ? 180 : 0) + 'deg' }
+              { rotateY: (direction === 'right' ? 0 : 180) + 'deg' }
             ],
-            ...(this.props.hit && { backgroundColor: 'yellow' })
+            ...(this.props.hit && { opacity: .5 })
           } 
         ]}
       />
@@ -38,7 +38,7 @@ export class Renderer extends Component {
 }
 
 const styles = StyleSheet.create({
-  mario: {
+  character: {
     position: 'absolute'
   }
 });
@@ -63,13 +63,13 @@ export default (world, pos) => {
       horizontal: 'right',
       vertical: 'up'
     },
-    health: 1,
+    health: 3,
     acceleration: 0,
     hit: false,
     action: 'idling',
     actions: {
-      idling: resolveAssetSource(MarioIdling),
-      walking: resolveAssetSource(MarioWalking),
+      idling: resolveAssetSource(CharacterIdling),
+      walking: resolveAssetSource(CharacterWalking),
     },
     'power-ups': {},
     animations: {},

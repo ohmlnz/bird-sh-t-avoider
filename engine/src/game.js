@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet, StatusBar, Text, TouchableOpacity, ImageBackground } from 'react-native';
-import { GameEngine } from 'react-native-game-engine';
-import { LevelOne } from './levels/one';
+import React, { PureComponent } from 'react'
+import { View, StyleSheet, StatusBar, Text, TouchableOpacity, ImageBackground } from 'react-native'
+import { GameEngine } from 'react-native-game-engine'
+import { LevelOne } from './levels/one'
 import Systems from './systems'
-import BusStop from './busstop.jpg';
+import BusStop from './busstop.jpg'
 
 export default class Game extends PureComponent {
   state = {
-    running: true
+    running: true,
   }
 
   gameover = () => {

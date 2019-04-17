@@ -1,7 +1,9 @@
 import Bird from './bird';
-import Mario from './mario';
+import Character from './character';
+import Devtools from './debugging/devtools';
 
 export default [
   Bird,
-  Mario
+  Character,
+  Devtools
 ];

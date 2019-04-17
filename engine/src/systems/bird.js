@@ -1,9 +1,9 @@
 import { Dimensions } from 'react-native';
 import Matter from 'matter-js';
-import birdHelpers from './lib/bird'
+import birdHelpers from './helpers/bird'
 import Turd  from '../components/turd/index';
 import uuidv1 from 'uuid/v1'
-import { collidesWith, randomized } from './helpers';
+import { collidesWith, randomized } from './helpers/utils';
 const { width, height } = Dimensions.get('window');
 
 let levelTime = 5;
@@ -18,10 +18,10 @@ let currentPoop = 0
 export default (entities, { dispatch }) => {
   // update time
   entities.time += .03;
-  let { physics, mario } = entities;
+  let { physics, character } = entities;
 
   // defaults hit box to false
-  mario.hit = false;
+  character.hit = false;
 
   // bird position logic
   let seconds = parseFloat(entities.time.toFixed(3));
@@ -38,6 +38,7 @@ export default (entities, { dispatch }) => {
   if(seconds >= nextSend) {
     let birdName = '__bird__' + uuidv1();
     let newBird = birdHelpers.addBird(physics.world, width, birdName);
+    entities.birds++
     if (!newBird.isGoingLeft) newBird.direction.horizontal = 'left'
     let turd = Turd(physics.world, { x: - 50, y : newBird.body.position.y })
     newBird.turds = new Array(3).fill(turd)
@@ -49,12 +50,12 @@ export default (entities, { dispatch }) => {
 
   let birds = birdHelpers.getBirds(entities);
 
-  // checks for collisions between mario and turds
+  // checks for collisions between character and turds
   Object.keys(entities).filter(e => e.includes('__turd__')).forEach(t => {
-    if (collidesWith(entities[t].body, mario.body)) {
-      if (!entities[t].collided) mario.health--
+    if (collidesWith(entities[t].body, character.body)) {
+      if (!entities[t].collided) character.health--
       entities[t].collided = true
-      mario.hit = true
+      character.hit = true
     }
   })
 
@@ -96,8 +97,8 @@ export default (entities, { dispatch }) => {
     }
   }
 
-  // mario health management
-  if (mario.health <= 0) {
+  // character health management
+  if (character.health <= 0) {
     dispatch({ type: 'game-over' });
   }
 

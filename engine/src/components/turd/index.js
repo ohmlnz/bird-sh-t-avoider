@@ -17,8 +17,8 @@ export class Renderer extends Component {
           {
             top: y,
             left: x,
-            width: 50,
-            height: 50,
+            width: 30,
+            height: 30,
             position: 'absolute',
           } 
         ]}
@@ -28,8 +28,8 @@ export class Renderer extends Component {
 }
 
 export default (world, pos) => {
-  let width = 50;
-  let height = 50;
+  let width = 30;
+  let height = 30;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 0.8,
     frictionAir: 0.2,
