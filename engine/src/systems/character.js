@@ -6,12 +6,20 @@ export default (entities, { touches }) => {
   let { character } = entities;
   let pressed = touches.filter(t => t.type === 'start')[0];
   let end = touches.filter(t => t.type === 'end')[0];
+  let timestamp = touches[0] && touches[0].event.timestamp
 
   // sets action based on event input
   if (pressed && !end) {
+    // if the user taps on the screen
+    if (entities.exit - entities.entry <= 1000) {
+      // enable sprint mode
+      // reset stamps
+    }
+    entities.entry = timestamp
     character.action = 'walking';
     character.direction.horizontal = pressed.event.locationX > (width / 2) ? 'right' : 'left';
   } else if (end) {
+    entities.exit = timestamp
     character.action = 'idling';
     character.acceleration = 0;
   }
