@@ -1,9 +1,10 @@
 import Matter from 'matter-js';
 import { Dimensions } from 'react-native';
+import Heart  from '../components/heart/index';
 const { width } = Dimensions.get('window');
 
-export default (entities, { touches }) => {
-  let { character } = entities;
+export default (entities, { touches, dispatch }) => {
+  let { character, physics } = entities;
   let pressed = touches.filter(t => t.type === 'start')[0];
   let end = touches.filter(t => t.type === 'end')[0];
 
@@ -34,6 +35,25 @@ export default (entities, { touches }) => {
     character.body.position.x = 0
   } else if (character.body.position.x > width) {
     character.body.position.x = width
+  }
+
+  // character health management
+  if (character.health <= 0) {
+    dispatch({ type: 'game-over' });
+  }
+
+  // set health bar
+  if (character.setHealth) {
+    // delete previous entities
+    Object.keys(entities).forEach(e => {
+      if (e.includes('heart')) delete entities[e]
+    })
+
+    for (let i = 0; i < character.health; i++) {
+      let heart = Heart(physics.world, { x: (width - 100) - (i * 25), y : 50 })
+      entities[`heart-${i + 1}`] = heart
+    }
+    character.setHealth = false
   }
 
   return entities;

@@ -7,6 +7,7 @@
 **/
 
 export default (entities, { dispatch }) => {
-  //console.log(entities.birds)
+  // find out how to display score on screen
+  //console.log(entities.score)
   return entities;
 }

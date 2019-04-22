@@ -1,11 +1,12 @@
 import Matter from 'matter-js';
 import Bird  from '../../components/bird/index';
-import { hasExceededScreenLimits } from './utils'
+import { hasExceededScreenLimits, randomized } from './utils'
 
 function setPosition(bird,width) {
   let { position } = bird.body;
+  const speed = randomized(4, 7)
   Matter.Body.setPosition(bird.body, {
-    x: bird.isGoingLeft ? position.x -= 4 : position.x += 4,
+    x: bird.isGoingLeft ? position.x -= speed : position.x += speed,
     y: position.y
   });
 }

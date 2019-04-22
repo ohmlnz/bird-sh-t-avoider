@@ -66,6 +66,7 @@ export default (world, pos) => {
     health: 3,
     acceleration: 0,
     hit: false,
+    setHealth: true,
     action: 'idling',
     actions: {
       idling: resolveAssetSource(CharacterIdling),

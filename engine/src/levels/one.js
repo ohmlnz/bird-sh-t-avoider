@@ -22,6 +22,7 @@ export const LevelOne = () => {
     character: Character(world, { x: cx, y: height - 90 }),
     camera: { offsetY: 0 },
     time,
-    birds: 0
+    birds: 0,
+    score: 0
   };
 };

@@ -14,5 +14,5 @@ export const collidesWith = (bodyA, bodyB) => {
 
 // generates a random number between min and max
 export const randomized = (max, min = 0) => {
-	return Math.floor(Math.random(min) * Math.floor(max))
+	return Math.floor(Math.random() * (max - min)) + min;
 } 

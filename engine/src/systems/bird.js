@@ -3,7 +3,7 @@ import Matter from 'matter-js';
 import birdHelpers from './helpers/bird'
 import Turd  from '../components/turd/index';
 import uuidv1 from 'uuid/v1'
-import { collidesWith, randomized } from './helpers/utils';
+import { collidesWith, randomized, hasExceededScreenLimits } from './helpers/utils';
 const { width, height } = Dimensions.get('window');
 
 let levelTime = 5;
@@ -18,7 +18,7 @@ let currentPoop = 0
 export default (entities, { dispatch }) => {
   // update time
   entities.time += .03;
-  let { physics, character } = entities;
+  let { physics, character, score } = entities;
 
   // defaults hit box to false
   character.hit = false;
@@ -53,7 +53,10 @@ export default (entities, { dispatch }) => {
   // checks for collisions between character and turds
   Object.keys(entities).filter(e => e.includes('__turd__')).forEach(t => {
     if (collidesWith(entities[t].body, character.body)) {
-      if (!entities[t].collided) character.health--
+      if (!entities[t].collided) {
+        character.health--
+        character.setHealth = true
+      }
       entities[t].collided = true
       character.hit = true
     }
@@ -90,16 +93,13 @@ export default (entities, { dispatch }) => {
         if (turd.body.position.y > height) {
           bird.pooping = false
           bird.turds.pop()
+          // if turd falls within screen, score goes up
+          if (!hasExceededScreenLimits(turd)) entities.score++
           Matter.Composite.remove(physics.world, turd.body);
           delete entities[key]          
         }
        }
     }
-  }
-
-  // character health management
-  if (character.health <= 0) {
-    dispatch({ type: 'game-over' });
   }
 
   return entities;
