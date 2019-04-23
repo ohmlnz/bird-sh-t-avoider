@@ -8,6 +8,8 @@ import BusStop from './busstop.jpg'
 export default class Game extends PureComponent {
   state = {
     running: true,
+    gameover: false,
+    score: 0
   }
 
   gameover = () => {
@@ -27,9 +29,22 @@ export default class Game extends PureComponent {
   }
 
   handleEvent = ev => {
-    if (ev.type === 'game-over') {
-      this.gameover()
-    } 
+    switch(ev.type) {
+      case('game-over'):
+        this.gameover()
+        break;
+      case('score'):
+        this.updateScore(ev.args)
+        break;
+      default:
+        console.log('The type is invalid.')
+    }
+  }
+
+  updateScore = score => {
+    if (score) {
+      this.setState({ score })
+    }
   }
 
   render() {
@@ -44,6 +59,7 @@ export default class Game extends PureComponent {
             onEvent={this.handleEvent}
           >
             <StatusBar hidden={true} />
+              <Text style={styles.score}>{ this.state.score }</Text>
             { this.state.gameover && 
               <TouchableOpacity onPress={this.restart}>
                 <Text style={styles.gameover}>
@@ -71,6 +87,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
     fontSize: 50,
+    fontWeight: 'bold',
+  },
+  score: {
+    marginTop: 35,
+    marginLeft: 40,
+    color: 'black',
+    fontSize: 30,
     fontWeight: 'bold',
   }
 });

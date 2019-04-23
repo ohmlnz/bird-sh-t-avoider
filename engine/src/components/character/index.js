@@ -21,7 +21,7 @@ export class Renderer extends Component {
         style={[
           styles.character,
           {
-            width: 50,
+            width: 65,
             height: 80,
             left: x,
             top: y,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 });
 
 export default (world, pos) => {
-  let width = 50;
+  let width = 65;
   let height = 80;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 0.8,

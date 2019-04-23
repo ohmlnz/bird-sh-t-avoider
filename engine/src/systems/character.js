@@ -28,7 +28,7 @@ export default (entities, { touches, dispatch }) => {
   // sets coordinates based on horizontal direction property
   if (character.action === 'walking') {
     // acceleration may be based upon power-ups or set statically
-    character.acceleration += 0.03;
+    character.acceleration = 1 //+= 0.03;
     let { position, velocity } = character.body;
     Matter.Body.setVelocity(character.body, { x: 3.5 * character.acceleration, y: velocity.y });
 
@@ -58,7 +58,7 @@ export default (entities, { touches, dispatch }) => {
     })
 
     for (let i = 0; i < character.health; i++) {
-      let heart = Heart(physics.world, { x: (width - 100) - (i * 25), y : 50 })
+      let heart = Heart(physics.world, { x: (width - 100) - (i * 25), y : 40 })
       entities[`heart-${i + 1}`] = heart
     }
     character.setHealth = false

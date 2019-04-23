@@ -24,6 +24,7 @@ export const LevelOne = () => {
     time,
     entry: 0,
     exit: 0,
-    birds: 0
+    birds: 0,
+    score: 0
   };
 };

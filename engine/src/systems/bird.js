@@ -18,7 +18,7 @@ let currentPoop = 0
 export default (entities, { dispatch }) => {
   // update time
   entities.time += .03;
-  let { physics, character, score } = entities;
+  let { physics, character } = entities;
 
   // defaults hit box to false
   character.hit = false;
@@ -50,7 +50,6 @@ export default (entities, { dispatch }) => {
 
   let birds = birdHelpers.getBirds(entities);
 
-  // checks for collisions between character and turds
   Object.keys(entities).filter(e => e.includes('__turd__')).forEach(t => {
     if (collidesWith(entities[t].body, character.body)) {
       if (!entities[t].collided) {
@@ -93,8 +92,10 @@ export default (entities, { dispatch }) => {
         if (turd.body.position.y > height) {
           bird.pooping = false
           bird.turds.pop()
-          // if turd falls within screen, score goes up
-          if (!hasExceededScreenLimits(turd)) entities.score++
+          if (!hasExceededScreenLimits(turd)) {
+            entities.score = entities.score + 1
+            dispatch({ type: 'score', args: entities.score })  
+          }
           Matter.Composite.remove(physics.world, turd.body);
           delete entities[key]          
         }
