@@ -23,6 +23,7 @@ export default class Game extends PureComponent {
     this.refs.engine.swap(LevelOne());
 
     this.setState({
+      score: 0,
       running: true,
       gameover: false,
     })
@@ -37,7 +38,7 @@ export default class Game extends PureComponent {
         this.updateScore(ev.args)
         break;
       default:
-        console.log('The type is invalid.')
+        //console.log('The type is invalid.')
     }
   }
 
@@ -63,7 +64,8 @@ export default class Game extends PureComponent {
             { this.state.gameover && 
               <TouchableOpacity onPress={this.restart}>
                 <Text style={styles.gameover}>
-                  You lost! Click here to play again.
+                  Your score: {this.state.score + '\n'}
+                  Click here to play again.
                 </Text> 
               </TouchableOpacity> }
           </GameEngine>
