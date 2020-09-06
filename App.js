@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { AppLoading, Asset } from 'expo';
+import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset';
 import Engine from './engine';
 import Preload from './Preload';
 

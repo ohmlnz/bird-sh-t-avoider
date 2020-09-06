@@ -8,11 +8,12 @@
   },
   "dependencies": {
     "d3-interpolate": "^1.1.6",
-    "expo": "^32.0.0",
+    "expo": "^38.0.0",
+    "expo-asset": "~8.1.7",
     "lodash": "^4.17.13",
     "matter-js": "^0.13.0",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react": "16.11.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-animatable": "^1.2.4",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-game-engine": "git+https://github.com/bberak/react-native-game-engine.git#rx-update",
@@ -20,7 +21,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^8.2.3"
   },
   "private": true
 }
