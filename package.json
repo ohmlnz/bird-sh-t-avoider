@@ -21,7 +21,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "babel-preset-expo": "^8.2.3"
+    "babel-preset-expo": "^8.3.0"
   },
   "private": true
 }
