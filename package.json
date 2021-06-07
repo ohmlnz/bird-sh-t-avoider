@@ -7,7 +7,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "d3-interpolate": "^2.0.1",
+    "d3-interpolate": "^3.0.1",
     "expo": "^41.0.1",
     "expo-asset": "~8.3.2",
     "lodash": "^4.17.21",
